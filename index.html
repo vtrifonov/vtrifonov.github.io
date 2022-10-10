@@ -1,28 +1,29 @@
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </head>
 <body>
     <div style="padding-top: 50px; padding-left: 20px;">
-        �������� �����:
+        Въведете точки:
         <input type="text" id="txtInput" />
-        <input type="button" id="btnCalculate" value="���������" />
+        <input type="button" id="btnCalculate" value="Пресметни" />
     </div>
     <div id="tblResults" style="display: none; padding-left: 20px;">
         <table>
             <thead>
                 <th>
                     <h3>
-                        ������</h3>
+                        Оценка</h3>
                 </th>
                 <th>
                     <h3>
-                        �����</h3>
+                        Точки</h3>
                 </th>
             </thead>
             <tr>
                 <td>
-                    �� 2.00
+                    За 2.00
                 </td>
                 <td>
                     <span id="span2" />
@@ -30,7 +31,7 @@
             </tr>
             <tr>
                 <td>
-                    �� 3.00
+                    За 3.00
                 </td>
                 <td>
                     <span id="span3" />
@@ -38,7 +39,7 @@
             </tr>
             <tr>
                 <td>
-                    �� 3.50
+                    За 3.50
                 </td>
                 <td>
                     <span id="span35" />
@@ -46,7 +47,7 @@
             </tr>
             <tr>
                 <td>
-                    �� 4.00
+                    За 4.00
                 </td>
                 <td>
                     <span id="span4" />
@@ -54,7 +55,7 @@
             </tr>
             <tr>
                 <td>
-                    �� 4.50
+                    За 4.50
                 </td>
                 <td>
                     <span id="span45" />
@@ -62,7 +63,7 @@
             </tr>
             <tr>
                 <td>
-                    �� 5.00
+                    За 5.00
                 </td>
                 <td>
                     <span id="span5" />
@@ -70,7 +71,7 @@
             </tr>
             <tr>
                 <td>
-                    �� 5.50
+                    За 5.50
                 </td>
                 <td>
                     <span id="span55" />
@@ -78,7 +79,7 @@
             </tr>
             <tr>
                 <td>
-                    �� 6.00
+                    За 6.00
                 </td>
                 <td>
                     <span id="span6" />
@@ -87,11 +88,11 @@
         </table>
     </div>
     <div style="padding-top: 50px; padding-left: 20px; display: none" id="divCheck">
-        �������� ����� �� o�����:
+        Въведете точки за oценка:
         <input type="text" id="tbCheck" />
-        <input type="button" id="bntCheck" value="�������" />
+        <input type="button" id="bntCheck" value="Провери" />
         <div id="divResult" style="display: none">
-            ������: <span id="spanCheck" />
+            Оценка: <span id="spanCheck" />
         </div>
     </div>
     <script type="text/javascript">
@@ -171,7 +172,7 @@
             var total = parseInt($("#txtInput").val());
             var pointsToCheck = parseInt($("#tbCheck").val());
             if (pointsToCheck > total || pointsToCheck < 0) {
-                alert("��������� ����� �� ��������");
+                alert("Невалидни точки за проверка");
                 return;
             }
 
