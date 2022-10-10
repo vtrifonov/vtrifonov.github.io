@@ -1,0 +1,226 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+    <div style="padding-top: 50px; padding-left: 20px;">
+        �������� �����:
+        <input type="text" id="txtInput" />
+        <input type="button" id="btnCalculate" value="���������" />
+    </div>
+    <div id="tblResults" style="display: none; padding-left: 20px;">
+        <table>
+            <thead>
+                <th>
+                    <h3>
+                        ������</h3>
+                </th>
+                <th>
+                    <h3>
+                        �����</h3>
+                </th>
+            </thead>
+            <tr>
+                <td>
+                    �� 2.00
+                </td>
+                <td>
+                    <span id="span2" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    �� 3.00
+                </td>
+                <td>
+                    <span id="span3" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    �� 3.50
+                </td>
+                <td>
+                    <span id="span35" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    �� 4.00
+                </td>
+                <td>
+                    <span id="span4" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    �� 4.50
+                </td>
+                <td>
+                    <span id="span45" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    �� 5.00
+                </td>
+                <td>
+                    <span id="span5" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    �� 5.50
+                </td>
+                <td>
+                    <span id="span55" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    �� 6.00
+                </td>
+                <td>
+                    <span id="span6" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding-top: 50px; padding-left: 20px; display: none" id="divCheck">
+        �������� ����� �� o�����:
+        <input type="text" id="tbCheck" />
+        <input type="button" id="bntCheck" value="�������" />
+        <div id="divResult" style="display: none">
+            ������: <span id="spanCheck" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        var grade3 = new Array();
+        var grade35 = new Array();
+        var grade4 = new Array();
+        var grade45 = new Array();
+        var grade5 = new Array();
+        var grade55 = new Array();
+        var grade6 = new Array();
+
+        if (!Array.prototype.indexOf) {
+            Array.prototype.indexOf = function (obj, start) {
+                for (var i = (start || 0), j = this.length; i < j; i++) {
+                    if (this[i] === obj) { return i; }
+                }
+                return -1;
+            }
+        }
+
+        $("#btnCalculate").click(function () {
+            var total = parseInt($("#txtInput").val());
+            var pointsFor2 = parseInt(total / 2) - 1;
+            var remaining = total - pointsFor2 - 1;
+            var base = pointsFor2 + 1;
+
+            var onePoint = (3 / remaining);
+
+            for (var i = base; i < total + 1; i++) {
+                var grade = onePoint * i;
+                // from 3.00 to 3.50 - 3
+                if (grade < 3.5) {
+                    grade3.push(i);
+                }
+                // from 3.50 to 3.75 - 3.50
+                else if (grade < 3.75) {
+                    grade35.push(i);
+                }
+                // from 3.75 to 4.50 - 4.00
+                else if (grade < 4.50) {
+                    grade4.push(i);
+                }
+                // from 4.50 to 4.75 - 4.50
+                else if (grade < 4.75) {
+                    grade45.push(i);
+                }
+                // from 4.75 to 5.50 - 5.00
+                else if (grade < 5.50) {
+                    grade5.push(i);
+                }
+                // from 5.50 to 5.75 - 5.50
+                else if (grade < 5.75) {
+                    grade55.push(i);
+                }
+                // more than 5.75 - 6.00
+                else {
+                    grade6.push(i);
+                }
+            }
+
+            $("#span2").text("0 - " + pointsFor2);
+
+            setText(grade3, "#span3");
+            setText(grade35, "#span35");
+            setText(grade4, "#span4");
+            setText(grade45, "#span45");
+            setText(grade5, "#span5");
+            setText(grade55, "#span55");
+            setText(grade6, "#span6");
+
+            $("#divCheck").show();
+            $("#divResult").hide();
+            $("#tblResults").slideDown();
+        });
+
+        $("#bntCheck").click(function () {
+            var total = parseInt($("#txtInput").val());
+            var pointsToCheck = parseInt($("#tbCheck").val());
+            if (pointsToCheck > total || pointsToCheck < 0) {
+                alert("��������� ����� �� ��������");
+                return;
+            }
+
+            if (grade3.indexOf(pointsToCheck) > -1) {
+                $("#spanCheck").text("3.00");
+                $("#divResult").slideDown();
+            }
+            else if (grade35.indexOf(pointsToCheck) > -1) {
+                $("#spanCheck").text("3.50");
+                $("#divResult").slideDown();
+            }
+            else if (grade4.indexOf(pointsToCheck) > -1) {
+                $("#spanCheck").text("4.00");
+                $("#divResult").slideDown();
+            }
+            else if (grade45.indexOf(pointsToCheck) > -1) {
+                $("#spanCheck").text("4.50");
+                $("#divResult").slideDown();
+            }
+            else if (grade5.indexOf(pointsToCheck) > -1) {
+                $("#spanCheck").text("5.00");
+                $("#divResult").slideDown();
+            }
+            else if (grade55.indexOf(pointsToCheck) > -1) {
+                $("#spanCheck").text("5.50");
+                $("#divResult").slideDown();
+            }
+            else if (grade6.indexOf(pointsToCheck) > -1) {
+                $("#spanCheck").text("6.00");
+                $("#divResult").slideDown();
+            }
+            else {
+                $("#spanCheck").text("2.00");
+                $("#divResult").slideDown();
+            }
+        });
+
+        function setText(points, selector) {
+            var text = "";
+            for (var i = 0; i < points.length; i++) {
+                text += (text == "") ? points[i] : ", " + points[i];
+            }
+            if (text != "") {
+                $(selector).text(text);
+            }
+            else {
+                $(selector).hide();
+            }
+        }
+	
+    </script>
+</body>
